@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jesus</title>
+    <link href="home.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo">Logo</a>
+      <ul>
+        <li><a href="index.html">Folio</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Work</a></li>
+        <li><a href="popup.html">Contact</a></li>
+      </ul>
+    </header>
+    <section>
+      <img src="/images/background.png" id="background" />
+      <img src="/images/egg.png" id="egg" />
+      <h2 id="text">Almighty</h2>
+      <a href="#sec" id="btn">Explore</a>
+      <img src="/images/swamp.png" id="swamp" />
+      <img src="/images/man.png" id="man" />
+      <!-- <img src="treefront.png" id="tree"> -->
+    </section>
+    <div class="sec" id="sec">
+      <!-- <div class="sec2"></div> -->
+      <img
+        class="newimage"
+        src="https://img.traveltriangle.com/blog/wp-content/uploads/2017/12/shutterstock_586166441.jpg"
+        alt=""
+      />
+      <div class="lefting">
+        <h2 id="heaven">Heaven On Earth</h2>
+      </div>
+      <div class="righting">
+        <p style="color: white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+          laudantium ,
+        </p>
+        <p style="color: aliceblue">
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Lorem
+          ipsum dolor sit amet consectetur adipisicing.
+        </p>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+      $(document).on("scroll", function () {
+        $("p").css("left", Math.max(300 - 0.35 * window.scrollY, 0) + "px");
+      });
+      $(document).on("scroll", function () {
+        $("#heaven").css(
+          "right",
+          Math.max(300 - 0.35 * window.scrollY, 0) + "px"
+        );
+      });
+
+      let egg = document.getElementById("egg");
+      let swamp = document.getElementById("swamp");
+      let man = document.getElementById("man");
+      // let treefront = document.getElementById('treefront');
+      let text = document.getElementById("text");
+      let btn = document.getElementById("btn");
+      let background = document.getElementById("background");
+      let header = document.querySelector("header");
+      // let new2 = document.getElementById('new');
+
+      window.addEventListener("scroll", function () {
+        let value = window.scrollY;
+        egg.style.left = value * 0.25 + "px";
+        man.style.marginLeft = value * 0.25 + "px";
+
+        text.style.marginBottom = value * 0.25 + "px";
+
+        swamp.style.top = value * 1.2 + "px";
+        // treefront.style.marginLeft = value * 1.2 + 'px';
+        btn.style.marginTop = value * 1.2 + "px";
+        header.style.top = value * 0.9 + "px";
+        //   new2.style.marginLeft = value * 0.9 + 'px';
+        //   new2.style.bottom = value * 0.9 + 'px';
+      });
+    </script>
+
+    <div class="a1">
+
+        <h2 style="color: white">On the Way</h2>
+    </div>
+    <div class="a3"></div>
+    <div class="a2"></div>
+  </body>
+</html>

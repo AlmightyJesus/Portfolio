@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website With Typing Effect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">pandas<b>.</b></div>
+            <ul class="navItems">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Skills</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+            <div class="link">
+                <a href=""><i class="fab fa-linkedin"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-twitter"></i></a>
+            </div>
+        </nav>
+        <div class="wrapper">
+            <div class="check">
+                <div class="check2" style="font-size: 20px;">
+                  <a href="index2.html">Want to check today's weather</a>
+                </div>
+              </div>
+            
+            <div class="cols cols0">
+                
+                <span class="topline">Hello</span>
+                <h1>I'm <span class="multiText">Coder</span></h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, culpa!</p>
+                <div class="btns">
+                    <button>download CV</button>
+                    <button>hire me</button>
+                </div>
+            </div>
+            <div class="cols cols1">
+                <div class="imgbox">
+                    <img src="https://img.freepik.com/free-vector/pastel-peach-watercolor-background-vector_53876-62423.jpg?w=1380&t=st=1692125391~exp=1692125991~hmac=5d561a2af46bc11de8ae05e4f7788405eabe4d2014f8a443ca40c59b5d22dc3b" id="splash">
+                    <img src="[removal.ai]_3d8b48d9-f821-4e83-bbc8-1eada5a8d05e-cute-ai-generated-cartoon-bunny.png" alt="">
+                </div>
+            </div>
+            
+        </div>
+        <!-- <div class="check">
+            <div class="check2" style="font-size: 20px;">
+              <a href="#">Want to check today's weather</a>
+            </div>
+          </div> -->
+
+        
+
+    </div>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typingEffect = new Typed(".multiText",{
+            strings : ["coder","designer","student"],
+            loop : true,
+            typeSpeed : 100,
+            backSpeed : 80,
+            backDelay : 1500
+        })
+
+        const successCallback = (position) =>{
+            console.log(position);
+        };
+
+        const errorCallback = (error) =>{
+            console.log(error);
+        };
+
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <video autoplay muted loop id="myVideo">
+        <source src="images/chillout-beach-moewalls-com.mp4" type="video/mp4">
+      </video>
+
+    <div class="card">
+        
+        <div class="search">
+            <input type="text" placeholder="Enter a City Name" spellcheck="false">
+            <button><img src="images/search.png"></button>
+            <h2 id="close" style="margin-left: 30px; cursor: pointer; border-radius: 50%; background: rgb(153, 178, 196); width: 20%; height: 10%;"> Close</h2>
+        </div>
+        <div class="error">
+            <p>invalid city name</p>
+        </div>
+        <div class="weather">
+            <img src="images/rain.png"  class="weather-icon">
+            <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png" >
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png" >
+                    <div>
+                        <p class="wind">15 km/hr</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+
+    </div>
+
+    <script>
+
+        
+       
+
+        const apiKey = "dc7c391cfb3968a4096d3b7ac6b0c283";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const searchBox = document.querySelector(".search input")    // here we keep search as it have the elements of input of city name and search button
+        const searchBtn = document.querySelector(".search button")    // whenever search button is pressed it will sends the city information to function checkWeather
+        const weatherIcon = document.querySelector(".weather-icon")
+        const close = document.getElementById("close")
+
+        async function checkWeather(city){   //This defines an asynchronous function named checkWeather.  tech to run a program on long term
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);  // we added city here so that it would take the input from the user
+
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block"
+                document.querySelector(".weather").style.display = "none"
+            }
+            else{
+
+                var data = await response.json();
+            // console.log(data);
+
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+
+
+            if(data.weather[0].main == "Clouds" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/clouds.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Clear" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/clear.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Rain" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/rain.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Drizzle" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/drizzle.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Mist" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/mist.png"                                // src updates the source file 
+            }
+
+            document.querySelector(".error").style.display = "none"
+            document.querySelector(".weather").style.display = "block"
+            }
+
+            close.addEventListener('click', ()=>{
+                document.querySelector(".weather").style.display = "none"
+            })
+            
+            
+           
+
+           
+           
+
+        }
+
+        searchBtn.addEventListener('click', ()=>{
+            checkWeather(searchBox.value);                    // here searchbtn will have event of click and whenever button is clicked
+                                                            // and searchbox value gives what user have typed
+        })
+
+
+
+        
+
+    </script>
+
+    
+    
+</body>
+</html>
