@@ -3,82 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website With Typing Effect</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <nav>
-            <div class="logo">pandas<b>.</b></div>
-            <ul class="navItems">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Skills</a></li>
-                <li><a href="#">Blog</a></li>
-            </ul>
-            <div class="link">
-                <a href=""><i class="fab fa-linkedin"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-twitter"></i></a>
-            </div>
-        </nav>
-        <div class="wrapper">
-            <div class="check">
-                <div class="check2" style="font-size: 20px;">
-                  <a href="index2.html">Want to check today's weather</a>
+    <video autoplay muted loop id="myVideo">
+        <source src="images/chillout-beach-moewalls-com.mp4" type="video/mp4">
+      </video>
+
+    <div class="card">
+        
+        <div class="search">
+            <input type="text" placeholder="Enter a City Name" spellcheck="false">
+            <button><img src="images/search.png"></button>
+            <h2 id="close" style="margin-left: 30px; cursor: pointer; border-radius: 50%; background: rgb(153, 178, 196); width: 20%; height: 10%;"> Close</h2>
+        </div>
+        <div class="error">
+            <p>invalid city name</p>
+        </div>
+        <div class="weather">
+            <img src="images/rain.png"  class="weather-icon">
+            <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png" >
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
                 </div>
-              </div>
-            
-            <div class="cols cols0">
-                
-                <span class="topline">Hello</span>
-                <h1>I'm <span class="multiText">Coder</span></h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, culpa!</p>
-                <div class="btns">
-                    <button>download CV</button>
-                    <button>hire me</button>
-                </div>
-            </div>
-            <div class="cols cols1">
-                <div class="imgbox">
-                    <img src="https://img.freepik.com/free-vector/pastel-peach-watercolor-background-vector_53876-62423.jpg?w=1380&t=st=1692125391~exp=1692125991~hmac=5d561a2af46bc11de8ae05e4f7788405eabe4d2014f8a443ca40c59b5d22dc3b" id="splash">
-                    <img src="[removal.ai]_3d8b48d9-f821-4e83-bbc8-1eada5a8d05e-cute-ai-generated-cartoon-bunny.png" alt="">
+                <div class="col">
+                    <img src="images/wind.png" >
+                    <div>
+                        <p class="wind">15 km/hr</p>
+                        <p>Wind Speed</p>
+                    </div>
                 </div>
             </div>
             
         </div>
-        <!-- <div class="check">
-            <div class="check2" style="font-size: 20px;">
-              <a href="#">Want to check today's weather</a>
-            </div>
-          </div> -->
-
         
 
     </div>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
     <script>
-        var typingEffect = new Typed(".multiText",{
-            strings : ["coder","designer","student"],
-            loop : true,
-            typeSpeed : 100,
-            backSpeed : 80,
-            backDelay : 1500
+
+        
+       
+
+        const apiKey = "dc7c391cfb3968a4096d3b7ac6b0c283";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const searchBox = document.querySelector(".search input")    // here we keep search as it have the elements of input of city name and search button
+        const searchBtn = document.querySelector(".search button")    // whenever search button is pressed it will sends the city information to function checkWeather
+        const weatherIcon = document.querySelector(".weather-icon")
+        const close = document.getElementById("close")
+
+        async function checkWeather(city){   //This defines an asynchronous function named checkWeather.  tech to run a program on long term
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);  // we added city here so that it would take the input from the user
+
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block"
+                document.querySelector(".weather").style.display = "none"
+            }
+            else{
+
+                var data = await response.json();
+            // console.log(data);
+
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+
+
+            if(data.weather[0].main == "Clouds" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/clouds.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Clear" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/clear.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Rain" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/rain.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Drizzle" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/drizzle.png"                                // src updates the source file 
+            }
+            else if(data.weather[0].main == "Mist" )  {              // as weatheris in zero index and type of weather is in main
+                weatherIcon.src = "images/mist.png"                                // src updates the source file 
+            }
+
+            document.querySelector(".error").style.display = "none"
+            document.querySelector(".weather").style.display = "block"
+            }
+
+            close.addEventListener('click', ()=>{
+                document.querySelector(".weather").style.display = "none"
+            })
+            
+            
+           
+
+           
+           
+
+        }
+
+        searchBtn.addEventListener('click', ()=>{
+            checkWeather(searchBox.value);                    // here searchbtn will have event of click and whenever button is clicked
+                                                            // and searchbox value gives what user have typed
         })
 
-        const successCallback = (position) =>{
-            console.log(position);
-        };
-
-        const errorCallback = (error) =>{
-            console.log(error);
-        };
-
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 
+        
 
     </script>
+
+    
+    
 </body>
 </html>
